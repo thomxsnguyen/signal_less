@@ -23,8 +23,8 @@ class LatestAiDevelopment():
     def researcher(self) -> Agent:
         return Agent(
             config=self.agents_config['researcher'], # type: ignore[index]
-            verbose=True
-            tools=[SerperDevTool]
+            verbose=True,
+            tools=[SerperDevTool()]
         )
 
     @agent
