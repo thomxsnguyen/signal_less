@@ -7,11 +7,14 @@ from crewai_tools import SerperDevTool
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
 
 @CrewBase
-class LatestAiDevelopment():
-    """LatestAiDevelopment crew"""
+class ResearchCrew():
+    """Single-agent research crew use inside Flow"""
 
     agents: list[BaseAgent]
     tasks: list[Task]
+
+    agents_config = "config/agents.yaml"
+    tasks_config = "config/tasks.yaml"
 
     # Learn more about YAML configuration files here:
     # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
@@ -19,6 +22,7 @@ class LatestAiDevelopment():
     
     # If you would like to add tools to your agents, you can learn more about it here:
     # https://docs.crewai.com/concepts/agents#agent-tools
+
     @agent
     def researcher(self) -> Agent:
         return Agent(
@@ -27,12 +31,6 @@ class LatestAiDevelopment():
             tools=[SerperDevTool()]
         )
 
-    @agent
-    def reporting_analyst(self) -> Agent:
-        return Agent(
-            config=self.agents_config['reporting_analyst'], # type: ignore[index]
-            verbose=True
-        )
 
     # To learn more about structured task outputs,
     # task dependencies, and task callbacks, check out the documentation:
@@ -43,12 +41,6 @@ class LatestAiDevelopment():
             config=self.tasks_config['research_task'], # type: ignore[index]
         )
 
-    @task
-    def reporting_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['reporting_task'], # type: ignore[index]
-            output_file='report.md'
-        )
 
     @crew
     def crew(self) -> Crew:

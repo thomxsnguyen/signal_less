@@ -2,9 +2,11 @@
 import sys
 import warnings
 
+from pydantic import BaseModel
 from datetime import datetime
+from crewai.flow import Flow, listen, start
 
-from latest_ai_development.crew import LatestAiDevelopment
+from .crew import ResearchCrew
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
@@ -13,82 +15,37 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 # Replace with inputs you want to test with, it will automatically
 # interpolate any tasks and agents information
 
+class ResearchFlowState(BaseModel):
+    topic: str = ""
+    report: str = ""
+
+class LatestAiFlow(Flow[ResearchFlowState]):
+    @start()
+    def prepare_topic(self, crewai_trigger_payload: dict | None = None):
+        if crewai_trigger_payload:
+            self.state.topic = crewai_trigger_payload.get("topic", "AI Agents")
+        else:
+            self.state.topic = "AI Agents"
+        print(f"Topic: {self.state.topic}")
+    
+    @listen(prepare_topic)
+    def run_research(self):
+        result = ResearchCrew().crew().kickoff()
+        self.state.report = result.raw
+        print("Research crew finished.")
+    
+    @listen(run_research)
+    def summarize(self):
+        print("Report path: output/report.md")
+    
+def kickoff():
+    LatestAiFlow().kickoff()
+
+def plot():
+    LatestAiFlow().plot()
+
 def run():
-    """
-    Run the crew.
-    """
-    inputs = {
-        'topic': 'Open source AI agent frameworks',
-        'current_year': str(datetime.now().year)
-    }
+    kickoff()
 
-    try:
-        LatestAiDevelopment().crew().kickoff(inputs=inputs)
-    except Exception as e:
-        raise Exception(f"An error occurred while running the crew: {e}")
-
-
-def train():
-    """
-    Train the crew for a given number of iterations.
-    """
-    inputs = {
-        "topic": "AI LLMs",
-        'current_year': str(datetime.now().year)
-    }
-    try:
-        LatestAiDevelopment().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
-
-    except Exception as e:
-        raise Exception(f"An error occurred while training the crew: {e}")
-
-def replay():
-    """
-    Replay the crew execution from a specific task.
-    """
-    try:
-        LatestAiDevelopment().crew().replay(task_id=sys.argv[1])
-
-    except Exception as e:
-        raise Exception(f"An error occurred while replaying the crew: {e}")
-
-def test():
-    """
-    Test the crew execution and returns the results.
-    """
-    inputs = {
-        "topic": "AI LLMs",
-        "current_year": str(datetime.now().year)
-    }
-
-    try:
-        LatestAiDevelopment().crew().test(n_iterations=int(sys.argv[1]), eval_llm=sys.argv[2], inputs=inputs)
-
-    except Exception as e:
-        raise Exception(f"An error occurred while testing the crew: {e}")
-
-def run_with_trigger():
-    """
-    Run the crew with trigger payload.
-    """
-    import json
-
-    if len(sys.argv) < 2:
-        raise Exception("No trigger payload provided. Please provide JSON payload as argument.")
-
-    try:
-        trigger_payload = json.loads(sys.argv[1])
-    except json.JSONDecodeError:
-        raise Exception("Invalid JSON payload provided as argument")
-
-    inputs = {
-        "crewai_trigger_payload": trigger_payload,
-        "topic": "",
-        "current_year": ""
-    }
-
-    try:
-        result = LatestAiDevelopment().crew().kickoff(inputs=inputs)
-        return result
-    except Exception as e:
-        raise Exception(f"An error occurred while running the crew with trigger: {e}")
+if __name__ == '__main__':
+    kickoff()
