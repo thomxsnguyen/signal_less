@@ -1,0 +1,462 @@
+{
+    "collected_at": "2026-05-06 23:06:12",
+    "system": {
+        "os": "macOS",
+        "version": "26.2",
+        "architecture": "arm64",
+        "hostname": "Thomass-MacBook-Pro-4.local",
+        "python_version": "3.13.2"
+    },
+    "cpu": {
+        "cpu_model": "Apple M3 Pro",
+        "physical_cores": 12,
+        "logical_cores": 12,
+        "cpu_freq": {
+            "current_mhz": 4056,
+            "min_mhz": 696,
+            "max_mhz": 4056
+        },
+        "cpu_usage_percent": 22.5,
+        "per_core_usage": [
+            47.5,
+            34.3,
+            28.3,
+            19.0,
+            16.8,
+            11.0,
+            4.0,
+            15.3,
+            9.1,
+            2.0,
+            10.2,
+            0.0
+        ],
+        "temperatures": {
+            "note": "Temperature monitoring requires third-party tools on macOS"
+        },
+        "boot_time": "2026-05-05 12:31:12"
+    },
+    "ram": {
+        "total_gb": 18.0,
+        "available_gb": 3.79,
+        "used_gb": 6.81,
+        "free_gb": 0.06,
+        "usage_percent": 78.9,
+        "swap": {
+            "total_gb": 9.0,
+            "used_gb": 7.43,
+            "free_gb": 1.57,
+            "usage_percent": 82.5
+        }
+    },
+    "disk": {
+        "partitions": [
+            {
+                "device": "/dev/disk3s1s1",
+                "mountpoint": "/",
+                "filesystem": "apfs",
+                "total_gb": 460.43,
+                "used_gb": 16.54,
+                "free_gb": 124.59,
+                "usage_percent": 11.7
+            },
+            {
+                "device": "/dev/disk3s6",
+                "mountpoint": "/System/Volumes/VM",
+                "filesystem": "apfs",
+                "total_gb": 460.43,
+                "used_gb": 9.0,
+                "free_gb": 124.59,
+                "usage_percent": 6.7
+            },
+            {
+                "device": "/dev/disk3s2",
+                "mountpoint": "/System/Volumes/Preboot",
+                "filesystem": "apfs",
+                "total_gb": 460.43,
+                "used_gb": 15.94,
+                "free_gb": 124.59,
+                "usage_percent": 11.3
+            },
+            {
+                "device": "/dev/disk3s4",
+                "mountpoint": "/System/Volumes/Update",
+                "filesystem": "apfs",
+                "total_gb": 460.43,
+                "used_gb": 0.75,
+                "free_gb": 124.59,
+                "usage_percent": 0.6
+            },
+            {
+                "device": "/dev/disk1s2",
+                "mountpoint": "/System/Volumes/xarts",
+                "filesystem": "apfs",
+                "total_gb": 0.49,
+                "used_gb": 0.01,
+                "free_gb": 0.47,
+                "usage_percent": 1.2
+            },
+            {
+                "device": "/dev/disk1s1",
+                "mountpoint": "/System/Volumes/iSCPreboot",
+                "filesystem": "apfs",
+                "total_gb": 0.49,
+                "used_gb": 0.01,
+                "free_gb": 0.47,
+                "usage_percent": 1.2
+            },
+            {
+                "device": "/dev/disk1s3",
+                "mountpoint": "/System/Volumes/Hardware",
+                "filesystem": "apfs",
+                "total_gb": 0.49,
+                "used_gb": 0.0,
+                "free_gb": 0.47,
+                "usage_percent": 0.6
+            },
+            {
+                "device": "/dev/disk3s5",
+                "mountpoint": "/System/Volumes/Data",
+                "filesystem": "apfs",
+                "total_gb": 460.43,
+                "used_gb": 291.05,
+                "free_gb": 124.59,
+                "usage_percent": 70.0
+            },
+            {
+                "device": "/dev/disk2s1",
+                "mountpoint": "/System/Volumes/Update/SFR/mnt1",
+                "filesystem": "apfs",
+                "total_gb": 5.0,
+                "used_gb": 2.13,
+                "free_gb": 2.85,
+                "usage_percent": 42.8
+            },
+            {
+                "device": "/dev/disk3s1",
+                "mountpoint": "/System/Volumes/Update/mnt1",
+                "filesystem": "apfs",
+                "total_gb": 460.43,
+                "used_gb": 16.54,
+                "free_gb": 124.59,
+                "usage_percent": 11.7
+            }
+        ],
+        "io_stats": {
+            "read_mb": 4375782.82,
+            "write_mb": 861891.72,
+            "read_count": 1002307425,
+            "write_count": 11133344
+        }
+    },
+    "network": {
+        "bytes_sent_mb": 845.49,
+        "bytes_received_mb": 214.29,
+        "packets_sent": 3323923,
+        "packets_received": 13746402,
+        "errors_in": 0,
+        "errors_out": 0,
+        "dropped_in": 0,
+        "dropped_out": 0,
+        "interfaces": [
+            {
+                "name": "lo0",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "2",
+                        "address": "127.0.0.1",
+                        "netmask": "255.0.0.0"
+                    },
+                    {
+                        "family": "30",
+                        "address": "::1",
+                        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+                    },
+                    {
+                        "family": "30",
+                        "address": "fe80::1%lo0",
+                        "netmask": "ffff:ffff:ffff:ffff::"
+                    }
+                ]
+            },
+            {
+                "name": "en0",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "2",
+                        "address": "192.168.0.25",
+                        "netmask": "255.255.255.0"
+                    },
+                    {
+                        "family": "18",
+                        "address": "ea:b2:58:49:b2:cc",
+                        "netmask": null
+                    },
+                    {
+                        "family": "30",
+                        "address": "fe80::4be:66c1:d78e:b741%en0",
+                        "netmask": "ffff:ffff:ffff:ffff::"
+                    },
+                    {
+                        "family": "30",
+                        "address": "2600:8802:2714:b500:4f3:ef4b:259b:c94b",
+                        "netmask": "ffff:ffff:ffff:ffff::"
+                    },
+                    {
+                        "family": "30",
+                        "address": "2600:8802:2714:b500:352f:833b:beb2:f84a",
+                        "netmask": "ffff:ffff:ffff:ffff::"
+                    },
+                    {
+                        "family": "30",
+                        "address": "2600:8802:2714:b500::cb8e",
+                        "netmask": "ffff:ffff:ffff:ffff::"
+                    }
+                ]
+            },
+            {
+                "name": "anpi0",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "18",
+                        "address": "ee:8d:a6:ce:ea:f9",
+                        "netmask": null
+                    }
+                ]
+            },
+            {
+                "name": "anpi1",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "18",
+                        "address": "ee:8d:a6:ce:ea:fa",
+                        "netmask": null
+                    }
+                ]
+            },
+            {
+                "name": "anpi2",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "18",
+                        "address": "ee:8d:a6:ce:ea:fb",
+                        "netmask": null
+                    }
+                ]
+            },
+            {
+                "name": "en4",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "18",
+                        "address": "ee:8d:a6:ce:ea:d9",
+                        "netmask": null
+                    }
+                ]
+            },
+            {
+                "name": "en5",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "18",
+                        "address": "ee:8d:a6:ce:ea:da",
+                        "netmask": null
+                    }
+                ]
+            },
+            {
+                "name": "en7",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "18",
+                        "address": "ee:8d:a6:ce:ea:db",
+                        "netmask": null
+                    }
+                ]
+            },
+            {
+                "name": "en1",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "18",
+                        "address": "36:34:c8:d1:bf:c0",
+                        "netmask": null
+                    }
+                ]
+            },
+            {
+                "name": "en2",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "18",
+                        "address": "36:34:c8:d1:bf:c4",
+                        "netmask": null
+                    }
+                ]
+            },
+            {
+                "name": "en3",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "18",
+                        "address": "36:34:c8:d1:bf:c8",
+                        "netmask": null
+                    }
+                ]
+            },
+            {
+                "name": "bridge0",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "18",
+                        "address": "36:34:c8:d1:bf:c0",
+                        "netmask": null
+                    }
+                ]
+            },
+            {
+                "name": "ap1",
+                "is_up": false,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "18",
+                        "address": "a2:af:59:3d:ed:76",
+                        "netmask": null
+                    }
+                ]
+            },
+            {
+                "name": "awdl0",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "18",
+                        "address": "aa:dd:96:9f:2e:cd",
+                        "netmask": null
+                    },
+                    {
+                        "family": "30",
+                        "address": "fe80::a8dd:96ff:fe9f:2ecd%awdl0",
+                        "netmask": "ffff:ffff:ffff:ffff::"
+                    }
+                ]
+            },
+            {
+                "name": "llw0",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "18",
+                        "address": "aa:dd:96:9f:2e:cd",
+                        "netmask": null
+                    },
+                    {
+                        "family": "30",
+                        "address": "fe80::a8dd:96ff:fe9f:2ecd%llw0",
+                        "netmask": "ffff:ffff:ffff:ffff::"
+                    }
+                ]
+            },
+            {
+                "name": "utun0",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "30",
+                        "address": "fe80::fbee:472e:d626:4340%utun0",
+                        "netmask": "ffff:ffff:ffff:ffff::"
+                    }
+                ]
+            },
+            {
+                "name": "utun1",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "30",
+                        "address": "fe80::5c45:3ae2:bf07:fc2%utun1",
+                        "netmask": "ffff:ffff:ffff:ffff::"
+                    }
+                ]
+            },
+            {
+                "name": "utun2",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "30",
+                        "address": "fe80::6941:1aed:daf:4235%utun2",
+                        "netmask": "ffff:ffff:ffff:ffff::"
+                    }
+                ]
+            },
+            {
+                "name": "utun3",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "30",
+                        "address": "fe80::ce81:b1c:bd2c:69e%utun3",
+                        "netmask": "ffff:ffff:ffff:ffff::"
+                    }
+                ]
+            },
+            {
+                "name": "utun4",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "30",
+                        "address": "fe80::61bf:429c:cd9b:8a1%utun4",
+                        "netmask": "ffff:ffff:ffff:ffff::"
+                    }
+                ]
+            },
+            {
+                "name": "utun5",
+                "is_up": true,
+                "speed_mbps": 0,
+                "addresses": [
+                    {
+                        "family": "30",
+                        "address": "fe80::2fe2:a789:38bd:f277%utun5",
+                        "netmask": "ffff:ffff:ffff:ffff::"
+                    }
+                ]
+            }
+        ]
+    },
+    "processes": []
+}
