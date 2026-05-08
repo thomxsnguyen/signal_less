@@ -33,30 +33,39 @@ class PCTroubleshooter():
     @agent
     def diagnostic_agent(self) -> Agent:
         return Agent(
-            config=self.agents_config['diagnostic_agent']
+            config=self.agents_config['diagnostic_agent'],
+            verbose=True
         )
 
     @agent
     def solution_agent(self) -> Agent:
-        pass
+        return Agent(
+            config=self.agents_config['solution_agent'],
+            verbose=True
+        )
 
     # Tasks
     @task
     def intake_task(self) -> Task:
-        pass
+        return Task(config=self.agents_config['intake_task'])
 
     @task
-    def classifier_agent(self) -> Task:
-        pass
+    def classifier_task(self) -> Task:
+        return Task(config=self.agents_config['classifier_task'])
     
     @task
-    def diagnostic_agent(self) -> Task:
-        pass
+    def diagnostic_task(self) -> Task:
+        return Task(config=self.agents_config['diagnostic_task'])
 
     @task
-    def diagnostic_agent(self) -> Task:
-        pass
+    def solution_task(self) -> Task:
+        return Task(config=self.agents_config['solution_task'])
 
     @crew
     def crew(self) -> Crew:
-        pass
+        return Crew(
+            agents=self.agents,
+            tasks=self.tasks,
+            process=Process.sequential,
+            verbose=True
+        )
