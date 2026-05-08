@@ -1,9 +1,39 @@
 #src/latest_ai_flow/crews/content_crew/config/tasks.yaml
 
-research_task:
+intake_task:
   description: >
-    Conduct through research about {topic}. Use web search to find current, credible information. The current year is 2026
+    A user has come to you with a PC problem. 
+
+    Their initial message is:
+    "{user_input}"
+
+    You also have access to their PC diagnostic data:
+    "{pc_info}"
+
+    Use this data to ask smarter, more targeted questions.
+    If you notice something concerning in the PC data, 
+    ask the user about it specifically.
+
+    Your job is to:
+    1. Greet the user warmly
+    2. Acknowledge their problem
+    3. Reference PC data if relevant
+    4. Ask follow up questions ONE AT A TIME
+    5. Ask minimum 3 maximum 6 questions
+    6. Stop early if you have enough information
+    7. Produce a clean structured summary
+
   expected_output: >
-    A markdown report with clear sections: key trends, notable tools or companies, and implications. Aim for 800-1200 wrods. No fenced code blocks around the whole document
-  agent: researcher
-  output_file: output/report.md
+    A clean structured summary containing:
+    - problem: main problem described
+    - symptoms: list of symptoms reported
+    - started: when the problem began
+    - frequency: constant or intermittent
+    - recent_changes: any recent updates or installs
+    - os: operating system
+    - pc_age: how old the PC is
+    - error_messages: any errors seen
+    - pc_data_flags: any concerning findings from pc_info.json
+    - additional_notes: anything else relevant
+
+  agent: intake_agent
