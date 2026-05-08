@@ -199,8 +199,8 @@ def collect_all():
     with open("pc_info.json", "w") as f:
         json.dump(data, f, indent=4)
 
-    print("✅ pc_info.json saved successfully!")
-    print(f"📊 Collected info for: {data['system']['os']} {data['system']['version']}")
+    print("pc_info.json saved successfully!")
+    print(f"Collected info for: {data['system']['os']} {data['system']['version']}")
     return data
 
 
