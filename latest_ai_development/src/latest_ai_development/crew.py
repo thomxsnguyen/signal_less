@@ -7,51 +7,65 @@ from crewai_tools import SerperDevTool
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
 
 @CrewBase
-class ResearchCrew():
-    """Single-agent research crew use inside Flow"""
+class PCTroubleshooter():
+    '''PC Troubleshoote Crew'''
 
     agents: list[BaseAgent]
     tasks: list[Task]
 
-    agents_config = "config/agents.yaml"
+    agent_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
 
-    # Learn more about YAML configuration files here:
-    # Agents: https://docs.crewai.com/concepts/agents#yaml-configuration-recommended
-    # Tasks: https://docs.crewai.com/concepts/tasks#yaml-configuration-recommended
-    
-    # If you would like to add tools to your agents, you can learn more about it here:
-    # https://docs.crewai.com/concepts/agents#agent-tools
+    @agent
+    def intake_agent(self) -> Agent:
+        return Agent(
+            config=self.agents_config['intake_agent'],
+            verbose=True
+        )
 
     @agent
-    def researcher(self) -> Agent:
+    def classifier_agent(self) -> Agent:
         return Agent(
-            config=self.agents_config['researcher'], # type: ignore[index]
-            verbose=True,
-            tools=[SerperDevTool()]
+            config=self.agents_config['classifier_agent'],
+            verbose=True
         )
 
+    @agent
+    def diagnostic_agent(self) -> Agent:
+        return Agent(
+            config=self.agents_config['diagnostic_agent'],
+            verbose=True
+        )
 
-    # To learn more about structured task outputs,
-    # task dependencies, and task callbacks, check out the documentation:
-    # https://docs.crewai.com/concepts/tasks#overview-of-a-task
+    @agent
+    def solution_agent(self) -> Agent:
+        return Agent(
+            config=self.agents_config['solution_agent'],
+            verbose=True
+        )
+
+    # Tasks
     @task
-    def research_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['research_task'], # type: ignore[index]
-        )
+    def intake_task(self) -> Task:
+        return Task(config=self.agents_config['intake_task'])
 
+    @task
+    def classifier_task(self) -> Task:
+        return Task(config=self.agents_config['classifier_task'])
+    
+    @task
+    def diagnostic_task(self) -> Task:
+        return Task(config=self.agents_config['diagnostic_task'])
+
+    @task
+    def solution_task(self) -> Task:
+        return Task(config=self.agents_config['solution_task'])
 
     @crew
     def crew(self) -> Crew:
-        """Creates the LatestAiDevelopment crew"""
-        # To learn how to add knowledge sources to your crew, check out the documentation:
-        # https://docs.crewai.com/concepts/knowledge#what-is-knowledge
-
         return Crew(
-            agents=self.agents, # Automatically created by the @agent decorator
-            tasks=self.tasks, # Automatically created by the @task decorator
+            agents=self.agents,
+            tasks=self.tasks,
             process=Process.sequential,
-            verbose=True,
-            # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
+            verbose=True
         )

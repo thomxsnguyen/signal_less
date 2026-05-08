@@ -1,9 +1,85 @@
 #src/latest_ai_flow/crews/content_crew/config/tasks.yaml
 
-research_task:
+intake_task:
   description: >
-    Conduct through research about {topic}. Use web search to find current, credible information. The current year is 2026
+    A user has come to you with a PC problem. 
+
+    Their initial message is:
+    "{user_input}"
+
+    You also have access to their PC diagnostic data:
+    "{pc_info}"
+
+    Use this data to ask smarter, more targeted questions.
+    If you notice something concerning in the PC data, 
+    ask the user about it specifically.
+
+    Your job is to:
+    1. Greet the user warmly
+    2. Acknowledge their problem
+    3. Reference PC data if relevant
+    4. Ask follow up questions ONE AT A TIME
+    5. Ask minimum 3 maximum 6 questions
+    6. Stop early if you have enough information
+    7. Produce a clean structured summary
+
   expected_output: >
-    A markdown report with clear sections: key trends, notable tools or companies, and implications. Aim for 800-1200 wrods. No fenced code blocks around the whole document
-  agent: researcher
-  output_file: output/report.md
+    A clean structured summary containing:
+    - problem: main problem described
+    - symptoms: list of symptoms reported
+    - started: when the problem began
+    - frequency: constant or intermittent
+    - recent_changes: any recent updates or installs
+    - os: operating system
+    - pc_age: how old the PC is
+    - error_messages: any errors seen
+    - pc_data_flags: any concerning findings from pc_info.json
+    - additional_notes: anything else relevant
+
+  agent: intake_agent
+
+classifier_task:
+  description: >
+    Using the intake summary and PC diagnostic data,
+    classify the problem as Hardware, Software, or Network.
+    Base your classification on both user symptoms and pc_info data.
+  expected_output: >
+    A classification report containing:
+    - category: Hardware | Software | Network
+    - confidence: percentage 0-100
+    - reasoning: why you classified it this way
+    - key_evidence: top 3 pieces of evidence
+    - focus_areas: what diagnostician should investigate
+  agent: classifier_agent
+
+diagnostician_task:
+  description: >
+    Using the classification report and PC diagnostic data,
+    perform a deep diagnosis to find the root cause.
+    Cross reference user symptoms with pc_info data.
+    Look for patterns that explain the problem.
+  expected_output: >
+    A diagnosis report containing:
+    - root_cause: most likely cause of the problem
+    - contributing_factors: other things making it worse
+    - evidence: data points that support the diagnosis
+    - severity: Low | Medium | High | Critical
+    - confidence: percentage 0-100
+  agent: diagnostician_agent
+
+solution_task:
+  description: >
+    Using the diagnosis report, provide clear step by step
+    fix instructions ordered from easiest to most complex.
+    Tailor solutions to the user's OS and PC specs from pc_info.
+  expected_output: >
+    A solution report containing:
+    - summary: one line description of the problem
+    - steps: numbered list of fix steps, each with:
+        - step: what to do
+        - why: why this helps
+        - fallback: what to do if it doesnt work
+    - estimated_time: how long the fix should take
+    - prevention: how to avoid this in future
+    - escalation: when to seek professional help
+  agent: solution_agent
