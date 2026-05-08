@@ -1,1 +1,0 @@
-{"name": "analyze_the_tool_result", "parameters": {"search_query": "{}"}}

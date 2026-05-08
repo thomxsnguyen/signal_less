@@ -1,2 +1,5 @@
-psutil==6.1.0
-
+fastapi
+uvicorn
+python-multipart
+python-dotenv
+crewai
