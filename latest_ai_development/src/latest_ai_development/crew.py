@@ -8,17 +8,33 @@ from crewai_tools import SerperDevTool
 
 @CrewBase
 class PCTroubleshooter():
+    '''PC Troubleshoote Crew'''
+
+    agents: list[BaseAgent]
+    tasks: list[Task]
+
+    agent_config = "config/agents.yaml"
+    tasks_config = "config/tasks.yaml"
+
     @agent
     def intake_agent(self) -> Agent:
-        pass
+        return Agent(
+            config=self.agents_config['intake_agent'],
+            verbose=True
+        )
 
     @agent
     def classifier_agent(self) -> Agent:
-        pass
+        return Agent(
+            config=self.agents_config['classifier_agent'],
+            verbose=True
+        )
 
     @agent
     def diagnostic_agent(self) -> Agent:
-        pass
+        return Agent(
+            config=self.agents_config['diagnostic_agent']
+        )
 
     @agent
     def solution_agent(self) -> Agent:
