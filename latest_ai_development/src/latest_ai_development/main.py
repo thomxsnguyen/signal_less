@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import sys
 import warnings
+import json
 
 from pydantic import BaseModel
 from datetime import datetime
@@ -15,34 +16,51 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 # Replace with inputs you want to test with, it will automatically
 # interpolate any tasks and agents information
 
-class ResearchFlowState(BaseModel):
-    topic: str = ""
-    report: str = ""
+class PCTroubleShooterState(BaseModel):
+    user_input: str = ""
+    pc_info: str = ""
+    report: str = ":"
 
-class LatestAiFlow(Flow[ResearchFlowState]):
+class PCTroubleShooterFlow(Flow[PCTroubleShooterState]):
     @start()
-    def prepare_topic(self, crewai_trigger_payload: dict | None = None):
-        if crewai_trigger_payload:
-            self.state.topic = crewai_trigger_payload.get("topic", "AI Agents")
-        else:
-            self.state.topic = "AI Agents"
-        print(f"Topic: {self.state.topic}")
-    
-    @listen(prepare_topic)
-    def run_research(self):
-        result = ResearchCrew().crew().kickoff()
-        self.state.report = result.raw
-        print("Research crew finished.")
-    
-    @listen(run_research)
-    def summarize(self):
-        print("Report path: output/report.md")
+    def load_pc_info(self):
+        self.state.user_input = "my PC is running really slowly"
+
+        try:
+            with open("pc_info.json", "r") as f:
+                pc_data = json.load(f)
+                self.state.pc_info = json.dumps(pc_data)
+        except:
+            self.state.pc_info = {}
+            print("pc_info.json not found - run script.py first")
+        
+        print(f"User problem: {self.state.user_input}")
+
+    @listen(load_pc_info)
+    def run_crew(self):
+        result = PCTroubleShooterFlow().crew().kickoff(
+            inputs={
+                "user_input": self.state.user_inputs, 
+                "pc_info": self.state.pc_info
+            }
+        )
+        self.state.result = result.raw  
+        print("Crew finished!")
+
+    @listen(run_crew)
+    def result(self):
+        print("\n RESULT")
+        print(self.state.result )
+        # Run your 4 agents
+        #Pass state.user_input
+
+
     
 def kickoff():
-    LatestAiFlow().kickoff()
+    PCTroubleShooterFlow().kickoff()
 
 def plot():
-    LatestAiFlow().plot()
+    PCTroubleShooterFlow().plot()
 
 def run():
     kickoff()
