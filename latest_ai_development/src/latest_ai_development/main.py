@@ -7,7 +7,7 @@ from pydantic import BaseModel
 from datetime import datetime
 from crewai.flow import Flow, listen, start
 
-from .crew import ResearchCrew
+from .crew import PCTroubleshooterCrew
 
 warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 
@@ -19,7 +19,7 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 class PCTroubleShooterState(BaseModel):
     user_input: str = ""
     pc_info: str = ""
-    report: str = ":"
+    result: str = ""
 
 class PCTroubleShooterFlow(Flow[PCTroubleShooterState]):
     @start()
@@ -31,16 +31,16 @@ class PCTroubleShooterFlow(Flow[PCTroubleShooterState]):
                 pc_data = json.load(f)
                 self.state.pc_info = json.dumps(pc_data)
         except:
-            self.state.pc_info = {}
+            self.state.pc_info = ""
             print("pc_info.json not found - run script.py first")
         
         print(f"User problem: {self.state.user_input}")
 
     @listen(load_pc_info)
     def run_crew(self):
-        result = PCTroubleShooterFlow().crew().kickoff(
+        result = PCTroubleshooterCrew().crew().kickoff(
             inputs={
-                "user_input": self.state.user_inputs, 
+                "user_input": self.state.user_input, 
                 "pc_info": self.state.pc_info
             }
         )

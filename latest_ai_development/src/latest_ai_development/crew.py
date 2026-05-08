@@ -7,13 +7,13 @@ from crewai_tools import SerperDevTool
 # https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
 
 @CrewBase
-class PCTroubleshooter():
-    '''PC Troubleshoote Crew'''
+class PCTroubleshooterCrew():
+    '''PC Troubleshoot Crew'''
 
     agents: list[BaseAgent]
     tasks: list[Task]
 
-    agent_config = "config/agents.yaml"
+    agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
 
     @agent
@@ -47,19 +47,19 @@ class PCTroubleshooter():
     # Tasks
     @task
     def intake_task(self) -> Task:
-        return Task(config=self.agents_config['intake_task'])
+        return Task(config=self.tasks_config['intake_task'])
 
     @task
     def classifier_task(self) -> Task:
-        return Task(config=self.agents_config['classifier_task'])
+        return Task(config=self.tasks_config['classifier_task'])
     
     @task
     def diagnostic_task(self) -> Task:
-        return Task(config=self.agents_config['diagnostic_task'])
+        return Task(config=self.tasks_config['diagnostic_task'])
 
     @task
     def solution_task(self) -> Task:
-        return Task(config=self.agents_config['solution_task'])
+        return Task(config=self.tasks_config['solution_task'])
 
     @crew
     def crew(self) -> Crew:

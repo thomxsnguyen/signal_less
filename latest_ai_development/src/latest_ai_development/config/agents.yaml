@@ -24,7 +24,7 @@ intake_agent:
     - Any error messages seen?
     Once collected, summarize everything into a clean structured report.
 
-    classifier_agent:
+classifier_agent:
   role: >
     PC Problem Classifier
   goal: >
@@ -39,7 +39,7 @@ intake_agent:
     the PC diagnostic data. You always explain your reasoning clearly
     so the diagnostic agent knows exactly where to focus.
 
-diagnostician_agent:
+diagnostic_agent:
   role: >
     PC Problem Diagnostician
   goal: >

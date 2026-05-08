@@ -52,7 +52,7 @@ classifier_task:
     - focus_areas: what diagnostician should investigate
   agent: classifier_agent
 
-diagnostician_task:
+diagnostic_task:
   description: >
     Using the classification report and PC diagnostic data,
     perform a deep diagnosis to find the root cause.
@@ -65,7 +65,7 @@ diagnostician_task:
     - evidence: data points that support the diagnosis
     - severity: Low | Medium | High | Critical
     - confidence: percentage 0-100
-  agent: diagnostician_agent
+  agent: diagnostic_agent
 
 solution_task:
   description: >
