@@ -30,6 +30,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 
 @app.post("/diagnose")
 async def diagnose(
@@ -45,7 +46,7 @@ async def diagnose(
     try:
         result = PCTroubleshooterCrew().crew().kickoff(
             inputs={
-                "user_inputs": user_input,
+                "user_input": user_input,
                 "pc_info": json.dumps(pc_info_data),
             }
         )

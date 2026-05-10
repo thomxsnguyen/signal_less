@@ -1,28 +1,11 @@
-#src/latest_ai_flow/crews/content_crew/config/tasks.yaml
-
 intake_task:
   description: >
-    A user has come to you with a PC problem. 
-
-    Their initial message is:
-    "{user_input}"
-
-    You also have access to their PC diagnostic data:
-    "{pc_info}"
-
+    A user has come to you with a PC problem.
+    Their initial message is: "{user_input}"
+    You also have access to their PC diagnostic data: "{pc_info}"
     Use this data to ask smarter, more targeted questions.
-    If you notice something concerning in the PC data, 
-    ask the user about it specifically.
-
-    Your job is to:
-    1. Greet the user warmly
-    2. Acknowledge their problem
-    3. Reference PC data if relevant
-    4. Ask follow up questions ONE AT A TIME
-    5. Ask minimum 3 maximum 6 questions
-    6. Stop early if you have enough information
-    7. Produce a clean structured summary
-
+    Ask minimum 3 maximum 6 questions ONE AT A TIME.
+    Stop early if you have enough information.
   expected_output: >
     A clean structured summary containing:
     - problem: main problem described
@@ -33,15 +16,14 @@ intake_task:
     - os: operating system
     - pc_age: how old the PC is
     - error_messages: any errors seen
-    - pc_data_flags: any concerning findings from pc_info.json
-    - additional_notes: anything else relevant
-
+    - pc_data_flags: concerning findings from pc_info
   agent: intake_agent
 
 classifier_task:
   description: >
-    Using the intake summary and PC diagnostic data,
-    classify the problem as Hardware, Software, or Network.
+    Using the intake summary and PC diagnostic data:
+    "{pc_info}"
+    Classify the problem as Hardware, Software, or Network.
     Base your classification on both user symptoms and pc_info data.
   expected_output: >
     A classification report containing:
@@ -54,8 +36,9 @@ classifier_task:
 
 diagnostic_task:
   description: >
-    Using the classification report and PC diagnostic data,
-    perform a deep diagnosis to find the root cause.
+    Using the classification report and PC diagnostic data:
+    "{pc_info}"
+    Perform a deep diagnosis to find the root cause.
     Cross reference user symptoms with pc_info data.
     Look for patterns that explain the problem.
   expected_output: >
@@ -69,8 +52,10 @@ diagnostic_task:
 
 solution_task:
   description: >
-    Using the diagnosis report, provide clear step by step
-    fix instructions ordered from easiest to most complex.
+    Using the diagnosis report and PC diagnostic data:
+    "{pc_info}"
+    Provide clear step by step fix instructions ordered 
+    from easiest to most complex.
     Tailor solutions to the user's OS and PC specs from pc_info.
   expected_output: >
     A solution report containing:
