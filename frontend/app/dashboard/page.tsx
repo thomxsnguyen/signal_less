@@ -249,11 +249,40 @@ export default function Dashboard() {
           <h2 className="text-xs text-gray-400 tracking-widest mb-6">
             AI DIAGNOSTIC REPORT
           </h2>
-          <div className="prose prose-invert prose-sm max-w-none text-gray-300">
-            <ReactMarkdown>{diagnosis.result}</ReactMarkdown>
+          <div className="space-y-4">
+            <ReactMarkdown
+              components={{
+                h3: ({ children }) => (
+                  <h3 className="text-green-400 text-xs tracking-widest font-bold mt-6 mb-3 border-b border-[#1a1a1a] pb-2">
+                    {children}
+                  </h3>
+                ),
+                p: ({ children }) => (
+                  <p className="text-gray-300 text-sm leading-relaxed mb-3">
+                    {children}
+                  </p>
+                ),
+                strong: ({ children }) => (
+                  <strong className="text-white font-bold">{children}</strong>
+                ),
+                li: ({ children }) => (
+                  <li className="text-gray-300 text-sm leading-relaxed mb-2 flex gap-2">
+                    <span className="text-green-400 mt-1">→</span>
+                    <span>{children}</span>
+                  </li>
+                ),
+                ul: ({ children }) => (
+                  <ul className="space-y-1 mb-4">{children}</ul>
+                ),
+                ol: ({ children }) => (
+                  <ol className="space-y-3 mb-4">{children}</ol>
+                ),
+              }}
+            >
+              {diagnosis.result}
+            </ReactMarkdown>
           </div>
         </div>
-
         {/* Back Button */}
         <div className="mt-8">
           <a
