@@ -13,6 +13,9 @@ export default function Home() {
     if (!userInput || !file) return;
     setLoading(true);
 
+    const fileText = await file.text();
+    localStorage.setItem("pc_info", fileText);
+
     const formData = new FormData();
     formData.append("user_input", userInput);
     formData.append("pc_info", file);
